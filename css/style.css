@@ -1,0 +1,593 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===== HERO SECTION ===== */
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  background-image: url(/download/Layer\ 1.png);
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  padding-top: 200px;
+  color: #fff;
+}
+
+/* dark overlay behind hero content */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(0,0,0,0.15), rgba(0,0,0,0.25));
+  z-index: 0; /* ensure content above overlay */
+  pointer-events: none;
+}
+
+/* ===== LOGO WRAPPER & BLACK CIRCLE ===== */
+.logo-wrapper {
+  position: absolute;
+  top: 10px;               /* move logo a little up to avoid colliding with card */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;              /* keep logo above everything */
+}
+
+.circle-bg {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #000;
+  z-index: 1;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+}
+
+.logo {
+  position: relative;
+  width: 130px;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
+}
+
+/* ===== HERO TITLE ===== */
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: clamp(28px, 5.2vw, 56px);
+  letter-spacing: 2px;
+  line-height: 1.05;
+  z-index: 2;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  margin-top: 40px;
+  margin-bottom: 18px;
+}
+
+.hero-title strong {
+  display: block;
+  font-weight: 800;
+  font-size: clamp(30px, 6.5vw, 64px);
+  letter-spacing: 1.5px;
+}
+
+/* ===== ZIP CARD (clean rectangle + small decorative circle) ===== */
+.zip-card {
+  position: relative;
+  width: 360px;
+  max-width: 90%;
+  background: #fff;
+  padding: 36px 18px 20px;   /* extra top padding for circle overlap */
+  border-radius: 8px;        /* keep rectangle with rounded corners */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  z-index: 6;                /* above hero overlay, below logo */
+  margin-top: 30px;
+  text-align: center;
+  overflow: visible;
+}
+
+/* small decorative circle that overlaps top-center of card */
+.circle-deco {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #4fc28a 0%, #37a872 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(53,167,111,0.22), inset 0 -6px 12px rgba(255,255,255,0.06);
+  z-index: 7;
+}
+
+.circle-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* inputs / thumbs / desc / button */
+.zip-input {
+  width: calc(100% - 28px);
+  padding: 12px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  margin: 6px 0 12px;
+  font-size: 14px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+  margin: 8px 0 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.thumbs img {
+  height: 36px;
+  width: auto;
+  border-radius: 3px;
+  display: block;
+}
+
+.zip-desc {
+  font-size: 13px;
+  color: #777;
+  margin: 8px 6px 12px;
+}
+
+.btn-press {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 0;
+  background: #2b82d9;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-press:hover { background:#1c5ea8; }
+.btn-press:active { transform: translateY(1px); }
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 600px) {
+  .logo-wrapper { width:150px; height:150px; top:14px; }
+  .circle-bg { width:150px; height:150px; }
+  .logo { width:90px; }
+  .hero-title { font-size:24px; }
+}
+
+@media (max-width: 480px) {
+  .circle-deco { width: 60px; height:60px; top:-30px; }
+  .circle-dot { width:30px; height:30px; }
+  .zip-card { padding-top: 28px; width: 92%; }
+  .zip-input { width: calc(100% - 24px); }
+}
+
+/* ===== FEATURES SECTION ===== */
+/* FEATURES (icons-in-badges for white PNG icons) */
+.features {
+  background: #fff;
+  padding: 80px 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.features .container {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* feature card */
+.feature {
+  flex: 0 1 48%;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(18,18,18,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 120px;
+}
+
+/* hover */
+.feature:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(18,18,18,0.09);
+}
+
+/* icon circle - makes white icons visible */
+.icon-circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 84px;
+  /* choose any solid or gradient so white icon stands out */
+  background: linear-gradient(180deg, #39b882 0%, #35a76f 100%);
+  box-shadow: 0 6px 18px rgba(53,167,111,0.18);
+}
+
+/* ensure the white PNG scales and remains crisp */
+.icon-circle img {
+  width: 36px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+}
+
+/* text container */
+.feature-text {
+  flex: 1;
+}
+
+.feature-text h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #222;
+}
+
+.feature-text p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* responsive tweaks */
+@media (max-width: 800px) {
+  .feature {
+    flex: 1 1 100%;
+    max-width: 720px;
+    width: 100%;
+    text-align: left;
+    gap: 16px;
+  }
+
+  .icon-circle {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+  }
+
+  .icon-circle img {
+    width: 30px;
+  }
+
+  .features {
+    padding: 60px 16px;
+  }
+}
+
+
+/* ===== GREEN SECTION ===== */
+/* ===== base container if not present ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+
+/* ===== GREEN SECTION BASE ===== */
+.green-section {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(180deg,#56bf86 0%,#47a86f 100%);
+  padding: 80px 0 120px;
+}
+
+/* subtle top highlight for both blocks */
+.green-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ----- ROW + layout helpers ----- */
+.green-row { display: flex; gap: 40px; align-items: center; position: relative; z-index: 2; }
+
+/* center layout (top block) */
+.green-row.center { flex-direction: column; text-align: center; padding: 40px 0; }
+
+/* split layout (bottom block) */
+.green-row.split { align-items: center; justify-content: space-between; padding: 60px 0; }
+
+/* ----- ICONS ----- */
+.green-icon { flex: 0 0 260px; display:flex; align-items:center; justify-content:center; }
+.green-icon img { display:block; width:220px; height:auto; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12)); }
+
+/* smaller icon in top block */
+.green-top .green-icon img { width:140px; }
+
+/* big-left style to push icon partly off-screen */
+.green-bottom .big-left { align-self:flex-start; margin-left:-40px; }
+.green-bottom .big-left img { width:300px; max-width:45vw; transform: translateY(8px); }
+
+/* ----- CONTENT ----- */
+.green-content { flex: 1 1 auto; max-width:760px; }
+.green-content h2 { font-family:'Montserrat',sans-serif; font-size:40px; margin:0 0 18px; line-height:1.05; font-weight:700; }
+.green-content p { color: rgba(255,255,255,0.95); line-height:1.6; margin:0 0 16px; }
+
+/* outline button */
+.btn-outline {
+  display:inline-block;
+  border:2px solid rgba(255,255,255,0.95);
+  background:transparent;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:6px;
+  cursor:pointer;
+  transition: background .2s, transform .12s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.06); transform: translateY(-3px); }
+
+/* ===== DIAGONAL SEPARATORS ===== */
+/* bottom diagonal for top block */
+.green-top::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -80px;          /* pushes diagonal down */
+  height: 260px;          /* thickness of diagonal band */
+  background: rgba(0,0,0,0.06);
+  transform: skewY(-10deg);
+  transform-origin: left bottom;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* top diagonal for bottom block */
+.green-bottom::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: -80px;             /* pushes diagonal up so it overlaps with top's bottom diagonal */
+  height: 260px;
+  background: rgba(0,0,0,0.06);
+  transform: skewY(-10deg);
+  transform-origin: left top;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* subtle second shadow-line for depth (optional) */
+.green-top::after, .green-bottom::before {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04) inset;
+}
+
+/* ===== RESPONSIVE TWEAKS ===== */
+@media (max-width:1000px) {
+  .green-row.split { flex-direction: column-reverse; text-align: center; gap: 28px; }
+  .green-bottom .big-left { margin-left: 0; order: 0; }
+  .green-bottom .big-left img { width: 160px; transform: none; }
+  .green-top .green-icon img { width:120px; }
+  .green-content h2 { font-size: 30px; }
+  .green-section { padding-bottom: 80px; padding-top: 60px; }
+}
+
+@media (max-width:600px) {
+  .green-icon { flex: 0 0 auto; }
+  .green-icon img { width: 120px; }
+  .green-content { padding: 0 18px; }
+  .green-content h2 { font-size: 24px; }
+}
+
+
+/* Map wrapper - important: keep position:relative so absolute circle can center */
+.map-contact { /* wrapper section */
+  position: relative;
+}
+
+/* fix typo safe selector */
+.map-wrapper {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  margin-bottom: -4px;
+  display:block;
+}
+
+/* background image */
+.map-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(95%);
+}
+
+/* ---------- Circular white card ---------- */
+.contact-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -45%); /* slightly above exact center */
+  width: min(46vw, 520px);  /* responsive: max ~520px or 56% viewport */
+  height: min(46vw, 520px);
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* keep form centered inside circle */
+.contact-form {
+  width: 100%;
+  max-width: 340px;        /* controls text-field width inside circle */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* inputs / textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.98);
+  color: #333;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* subtle focus */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 3px solid rgba(43,130,217,0.15);
+  outline-offset: 2px;
+}
+
+/* textarea sizing */
+.contact-form textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* circle check button (submit) — placed overlap near bottom inside circle */
+.circle-check {
+  position: absolute;
+  bottom: 28px;             /* distance from bottom of circle */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#4bb07a 0%, #3ea36b 100%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  z-index: 6;
+}
+
+/* svg icon inside button */
+.circle-check svg { display:block; }
+
+/* small screen tweaks */
+@media (max-width: 900px) {
+  .map-wrapper { height: 480px; }
+  .contact-circle { width: min(68vw, 440px); height: min(68vw, 440px); padding: 28px; transform: translate(-50%, -42%); }
+  .contact-form { max-width: 300px; }
+  .circle-check { width:66px; height:66px; bottom:22px; }
+}
+
+@media (max-width: 520px) {
+  .map-wrapper { height: 420px; }
+  .contact-circle { width: 84vw; height: 84vw; padding: 20px; transform: translate(-50%, -40%); }
+  .contact-form { max-width: 240px; }
+  .contact-form textarea { min-height: 80px; }
+  .circle-check { width:56px; height:56px; bottom:18px; }
+}
+
+/* visually-hidden helper for sr-only (accessible text) */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ===== FOOTER SECTION ===== */
+.site-footer {
+  background: #4bb07a;        /* same green shade as upper sections */
+  padding: 20px 10px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255,255,255,0.95);
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.3px;
+}
+
+/* small white top separator line (optional aesthetic) */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .site-footer p {
+    font-size: 13px;
+  }
+}
